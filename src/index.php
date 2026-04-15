@@ -15,7 +15,7 @@ $currentDateTime = date('d.m.Y H:i:s');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Домашняя работа 2.1 – Hello, World!</title>
+    <title>Домашняя работа 2.2 – Hello, World!</title>
     <style>
         * {
             margin: 0;
