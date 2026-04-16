@@ -1,0 +1,14 @@
+[source]
+paths = ["."]
+
+[formatter]
+preset = "psr-12"
+
+print-width = 120
+tab-width = 2
+use-tabs = false
+single-quote = true
+trailing-comma = true
+remove-trailing-close-tag = true
+control-brace-style = "same-line"
+empty-line-before-return = true

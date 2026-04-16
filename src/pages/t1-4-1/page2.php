@@ -1,4 +1,5 @@
 <?php
+
 $url = 'https://httpbin.org/get';
 $headers = get_headers($url, true);
 $headersText = print_r($headers, true);

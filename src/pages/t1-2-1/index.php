@@ -1,4 +1,5 @@
 <?php
+
 $visitorName = 'Гость';
 if (isset($_SERVER['REMOTE_ADDR'])) {
   $visitorName = 'Посетитель (' . $_SERVER['REMOTE_ADDR'] . ')';

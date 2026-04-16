@@ -16,3 +16,14 @@ services:
       - ./src:/source
     depends_on:
       - php
+
+  mago:
+    image: ghcr.io/carthage-software/mago:1
+    volumes:
+      - ./src:/app
+      - ./mago.toml:/app/mago.toml
+    working_dir: /app
+    command: fmt
+    profiles:
+      - tools
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"

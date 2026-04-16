@@ -1,0 +1,10 @@
+{
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.php$",
+        "cmd": "cd ${workspaceFolder} && docker compose --profile tools run --rm mago fmt"
+      }
+    ]
+  }
+}
