@@ -1,0 +1,38 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+form,
+.textarea {
+  width: 800px;
+}
+
+label,
+input,
+select,
+textarea,
+button {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.checkbox-group label {
+  display: inline-block;
+  width: auto;
+  margin-right: 1rem;
+}
+
+button,
+.link-btn {
+  padding: 0.5rem 1rem;
+  background: #eee;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}

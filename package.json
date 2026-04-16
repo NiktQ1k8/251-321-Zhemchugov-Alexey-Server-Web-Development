@@ -1,0 +1,27 @@
+{
+  "name": "251-321-zhemchugov-alexey-server-web-development",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write 'src/**/*.{php,css}'",
+    "format:check": "prettier --check 'src/**/*.{php,css}'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NiktQ1k8/251-321-Zhemchugov-Alexey-Server-Web-Development.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NiktQ1k8/251-321-Zhemchugov-Alexey-Server-Web-Development/issues"
+  },
+  "homepage": "https://github.com/NiktQ1k8/251-321-Zhemchugov-Alexey-Server-Web-Development#readme",
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.25.0",
+    "prettier": "^3.8.3"
+  }
+}
