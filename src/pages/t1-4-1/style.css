@@ -6,32 +6,31 @@
   flex-grow: 1;
 }
 
-form,
-.textarea {
-  width: 800px;
-}
-
-label,
-input,
-select,
-textarea,
-button {
+.form__label {
   display: block;
-  width: 100%;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
 }
 
-.checkbox-group label {
-  display: inline-block;
-  width: auto;
-  margin-right: 1rem;
+p {
+  margin: 1rem 0 0.5rem;
 }
 
-button,
+.form__input {
+  width: 300px;
+  padding: 0.2rem;
+}
+
+.textarea,
+.form__textarea {
+  width: 800px;
+  resize: vertical;
+}
+
+.form__button,
 .link-btn {
   padding: 0.5rem 1rem;
-  background: #eee;
-  border: 1px solid #ccc;
+  background: lightgrey;
+  border: 1px solid grey;
   text-decoration: none;
   color: black;
   cursor: pointer;

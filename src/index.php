@@ -1,12 +1,4 @@
 <?php
-$visitorName = 'Гость';
-if (isset($_SERVER['REMOTE_ADDR'])) {
-  $visitorName = 'Посетитель (' . $_SERVER['REMOTE_ADDR'] . ')';
-}
-
-date_default_timezone_set('Europe/Moscow');
-$currentDateTime = date('d.m.Y H:i:s');
-
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 if (preg_match('/\.(css|js|svg|png|jpg|jpeg|gif|ico)$/', $uri)) {
