@@ -1,10 +1,7 @@
 {
-  "emeraldwalk.runonsave": {
-    "commands": [
-      {
-        "match": "\\.php$",
-        "cmd": "cd ${workspaceFolder} && docker compose --profile tools run --rm mago fmt"
-      }
-    ]
-  }
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+    "editor.formatOnSave": true
+  },
+  "intelephense.files.maxSize": 5000000
 }

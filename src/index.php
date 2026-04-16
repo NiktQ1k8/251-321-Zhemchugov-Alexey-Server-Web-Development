@@ -48,6 +48,7 @@ $pageCSSPath = "/pages/$page/style.css";
 ?>
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
@@ -56,9 +57,11 @@ $pageCSSPath = "/pages/$page/style.css";
   <link rel="stylesheet" href="/css/common.css" />
   <link rel="stylesheet" href="<?php echo htmlspecialchars($pageCSSPath); ?>" />
 </head>
+
 <body>
   <?php include '_header.php'; ?>
   <?php include $pageContentPath; ?>
   <?php include '_footer.php'; ?>
 </body>
+
 </html>
