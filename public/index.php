@@ -7,17 +7,17 @@ if (preg_match('/\.(css|js|svg|png|jpg|jpeg|gif|ico)$/', $uri)) {
 }
 
 $pages = [
-  't1-2-1' => '2.1. Домашняя работа: Hello, World!',
-  't1-4-1' => '4.1. Домашняя работа: Feedback Form.',
-  't2-1-2' => '1.2. Домашняя работа: Solve the equation.',
-  't2-2-2' => '2.2. Домашняя работа: Calculator.',
-  't2-5-1' => '5.1. Домашняя работа: "Notebook".',
-  't3-1-1' => '1.1. Домашняя работа.',
-  't3-2-1' => '2.1. Домашняя работа с роутингом.',
-  't3-2-2' => '2.2. Домашняя работа с представлением.',
-  't3-3-1' => '3.1. Домашняя работа.',
-  't3-4-1' => '4.1. Домашняя работа.',
-  't3-6' => '6. Итоговая работа.',
+  't1-2-1' => '1.2.1. Hello World',
+  't1-4-1' => '1.4.1. Feedback Form',
+  't2-1-2' => '2.1.2. Equation',
+  't2-2-2' => '2.2.2. Calculator',
+  't2-5-1' => '2.5.1. Notebook',
+  't3-1-1' => '3.1.1. OOP',
+  't3-2-1' => '3.2.1. Routing',
+  't3-2-2' => '3.2.2. Page Presentation',
+  't3-3-1' => '3.3.1. Query',
+  't3-4-1' => '3.4.1. Editing',
+  't3-6-cw' => '3.6. Comments - CW',
 ];
 
 $segments = array_values(array_filter(explode('/', $uri)));
@@ -38,13 +38,13 @@ $pageTitle = $pages[$page];
 if ($subpage !== null) {
   $pageContentPath = __DIR__ . "/pages/$page/$subpage.php";
   if (!file_exists($pageContentPath)) {
-    $pageContentPath = __DIR__ . "/pages/$page/index.php";
+    $pageContentPath = __DIR__ . "/pages/$page/$page.php";
   }
 } else {
-  $pageContentPath = __DIR__ . "/pages/$page/index.php";
+  $pageContentPath = __DIR__ . "/pages/$page/$page.php";
 }
 
-$pageCSSPath = "/pages/$page/style.css";
+$pageCSSPath = "/pages/$page/$page.css";
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -54,7 +54,7 @@ $pageCSSPath = "/pages/$page/style.css";
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <meta name="description" content="251-321 Жемчугов Алексей Иванович" />
   <title>251-321 Жемчугов Алексей Иванович</title>
-  <link rel="stylesheet" href="/css/common.css" />
+  <link rel="stylesheet" href="/style.css" />
   <link rel="stylesheet" href="<?php echo htmlspecialchars($pageCSSPath); ?>" />
 </head>
 

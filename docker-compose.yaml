@@ -2,27 +2,17 @@ services:
   php:
     build: .
     ports:
-      - "8000:8000"
+      - '8000:8000'
     volumes:
-      - ./src:/var/www/html
+      - ./public:/var/www/html
 
   browsersync:
     image: ustwo/browser-sync:latest
-    command:
-      [
-        "start",
-        "--proxy",
-        "php:8000",
-        "--files",
-        "./**/*",
-        "--port",
-        "3000",
-        "--no-open",
-      ]
+    command: ['start', '--proxy', 'php:8000', '--files', './**/*', '--port', '3000', '--no-open']
     ports:
-      - "3000:3000"
-      - "3001:3001"
+      - '3000:3000'
+      - '3001:3001'
     volumes:
-      - ./src:/source
+      - ./public:/source
     depends_on:
       - php

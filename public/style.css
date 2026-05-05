@@ -1,9 +1,8 @@
 body {
-  font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
 }
 
@@ -37,7 +36,6 @@ body {
 }
 
 .footer__subtitle {
-  font-size: 1.1rem;
   margin-bottom: 1.5rem;
 }
 
@@ -53,7 +51,6 @@ body {
 }
 
 .footer__col-title {
-  font-weight: bold;
   margin: 0 0 0.5rem;
 }
 
