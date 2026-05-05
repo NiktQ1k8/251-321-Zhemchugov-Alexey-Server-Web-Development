@@ -35,6 +35,6 @@
   </form>
 
   <p>
-    <a class="link-btn" href="/t1-4-1/t1-4-1-page2.php">Перейти на 2 страницу ==></a>
+    <a class="link-btn" href="/pages/t1-4-1/t1-4-1-page2.php">Перейти на 2 страницу ==></a>
   </p>
 </main>
