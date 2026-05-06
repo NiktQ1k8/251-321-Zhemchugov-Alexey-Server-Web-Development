@@ -285,12 +285,12 @@ $exprParam = $_GET['expr'] ?? '';
         <button type="button" class="btn" data-insert="(">(</button>
         <button type="button" class="btn" data-insert=")">)</button>
 
-        <button type="button" class="btn btn-fn" data-insert="sqrt(">√</button>
+        <button type="button" class="btn btn-fn" data-insert="sqrt(">sqrt</button>
         <button type="button" class="btn btn-fn" data-insert="ln(">ln</button>
         <button type="button" class="btn btn-fn" data-insert="log(">log</button>
         <button type="button" class="btn btn-fn" data-insert="!">!</button>
 
-        <button type="button" class="btn btn-fn" data-insert="pi">π</button>
+        <button type="button" class="btn btn-fn" data-insert="pi">pi</button>
         <button type="button" class="btn btn-fn" data-insert="e">e</button>
         <button type="button" class="btn btn-fn" data-insert="^">^</button>
         <button type="button" class="btn btn-op" data-insert="/">/</button>
@@ -298,12 +298,12 @@ $exprParam = $_GET['expr'] ?? '';
         <button type="button" class="btn btn-num" data-insert="7">7</button>
         <button type="button" class="btn btn-num" data-insert="8">8</button>
         <button type="button" class="btn btn-num" data-insert="9">9</button>
-        <button type="button" class="btn btn-op" data-insert="*">×</button>
+        <button type="button" class="btn btn-op" data-insert="*">x</button>
 
         <button type="button" class="btn btn-num" data-insert="4">4</button>
         <button type="button" class="btn btn-num" data-insert="5">5</button>
         <button type="button" class="btn btn-num" data-insert="6">6</button>
-        <button type="button" class="btn btn-op" data-insert="-">−</button>
+        <button type="button" class="btn btn-op" data-insert="-">-</button>
 
         <button type="button" class="btn btn-num" data-insert="1">1</button>
         <button type="button" class="btn btn-num" data-insert="2">2</button>
