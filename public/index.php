@@ -32,8 +32,15 @@ if (!array_key_exists($page, $pages)) {
 
 $pageTitle = $pages[$page];
 $pageCSS = "/pages/$page/$page.css";
+$pageJS = "/pages/$page/$page.js";
 $pageContentPath = __DIR__ . "/pages/$page/$page.php";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  include $pageContentPath;
+  exit();
+}
 
 include __DIR__ . '/includes/_layout-open.php';
 include $pageContentPath;
 include __DIR__ . '/includes/_layout-close.php';
+?>
