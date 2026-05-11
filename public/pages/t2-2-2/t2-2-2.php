@@ -251,8 +251,6 @@ function evaluateExpression(string $expr): string
   }
 }
 
-// ── POST handler (PRG pattern) ────────────────────────────────────────────────
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $expr = trim($_POST['expression'] ?? '');
   $result = evaluateExpression($expr);

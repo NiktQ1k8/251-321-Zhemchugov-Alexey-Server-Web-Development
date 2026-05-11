@@ -51,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="/includes/style.css" />
   <link rel="stylesheet" href="/includes/_header.css" />
   <link rel="stylesheet" href="/includes/_footer.css" />
-  <link rel="stylesheet" href="<?php echo htmlspecialchars($pageCSS); ?>" />
-  <script src="<?php echo htmlspecialchars($pageJS); ?>" defer></script>
+  <link rel="stylesheet" href="<?= htmlspecialchars($pageCSS) ?>" />
+  <script src="<?= htmlspecialchars($pageJS) ?>" defer></script>
 </head>
 
 <body>
