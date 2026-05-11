@@ -6,10 +6,6 @@ if (preg_match('/\.(css|js|svg|png|jpg|jpeg|gif|ico)$/', $uri)) {
   return false;
 }
 
-if (preg_match('#^/pages/[^/]+/.+\.php$#', $uri)) {
-  return false;
-}
-
 $pages = [
   't1-2-1' => '1.2.1. Hello World',
   't1-4-1' => '1.4.1. Feedback Form',
@@ -24,23 +20,49 @@ $pages = [
   't3-6-cw' => '3.6. Comments - CW',
 ];
 
-$page = array_values(array_filter(explode('/', $uri)))[0] ?? 't1-2-1';
+$parts = array_values(array_filter(explode('/', $uri)));
+$page = $parts[0] ?? 't1-2-1';
+$subpage = $parts[1] ?? null;
 
 if (!array_key_exists($page, $pages)) {
   $page = 't1-2-1';
+  $subpage = null;
 }
 
 $pageTitle = $pages[$page];
 $pageCSS = "/pages/$page/$page.css";
 $pageJS = "/pages/$page/$page.js";
-$pageContentPath = __DIR__ . "/pages/$page/$page.php";
+$pageContentPath = $subpage !== null ? __DIR__ . "/pages/$page/$page-$subpage.php" : __DIR__ . "/pages/$page/$page.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   include $pageContentPath;
   exit();
 }
-
-include __DIR__ . '/includes/_layout-open.php';
-include $pageContentPath;
-include __DIR__ . '/includes/_layout-close.php';
 ?>
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <meta name="description" content="251-321 Жемчугов Алексей Иванович" />
+  <title>251-321 Жемчугов Алексей Иванович</title>
+  <link rel="stylesheet" href="/includes/style.css" />
+  <link rel="stylesheet" href="/includes/_header.css" />
+  <link rel="stylesheet" href="/includes/_footer.css" />
+  <link rel="stylesheet" href="<?php echo htmlspecialchars($pageCSS); ?>" />
+  <script src="<?php echo htmlspecialchars($pageJS); ?>" defer></script>
+</head>
+
+<body>
+
+  <?php include __DIR__ . '/includes/_header.php'; ?>
+
+  <?php include $pageContentPath; ?>
+
+  <?php include __DIR__ . '/includes/_footer.php'; ?>
+
+</body>
+
+</html>
