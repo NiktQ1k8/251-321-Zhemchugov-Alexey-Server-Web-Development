@@ -6,15 +6,13 @@
   let expr = '';
   let afterResult = false;
 
-  const resultParam = window.__calc.resultParam;
-  const exprParam = window.__calc.exprParam;
+  const { resultParam, exprParam } = window.__calc;
 
   if (resultParam !== null) {
     expr = exprParam;
     afterResult = true;
-    const isError = resultParam.startsWith('Ошибка');
     display.textContent = resultParam;
-    display.classList.toggle('calc-display--error', isError);
+    display.classList.toggle('calc-display--error', resultParam.startsWith('Ошибка'));
   }
 
   function updateDisplay() {
@@ -39,12 +37,9 @@
   }
 
   function backspace() {
-    if (afterResult) {
-      clear();
-      return;
-    }
-    const multi = ['sqrt(', 'log(', 'ln(', 'pi'];
-    for (const tok of multi) {
+    if (afterResult) { clear(); return; }
+    const tokens = ['ctg(', 'sqrt(', 'sin(', 'cos(', 'log(', 'tg(', 'ln(', 'pi'];
+    for (const tok of tokens) {
       if (expr.endsWith(tok)) {
         expr = expr.slice(0, -tok.length);
         updateDisplay();
@@ -53,11 +48,6 @@
     }
     expr = expr.slice(0, -1);
     updateDisplay();
-  }
-
-  function submit() {
-    exprInput.value = expr;
-    form.submit();
   }
 
   document.querySelectorAll('.btn').forEach((btn) => {
@@ -74,43 +64,12 @@
     exprInput.value = expr;
   });
 
-  const keyMap = {
-    0: '0',
-    1: '1',
-    2: '2',
-    3: '3',
-    4: '4',
-    5: '5',
-    6: '6',
-    7: '7',
-    8: '8',
-    9: '9',
-    '.': '.',
-    '+': '+',
-    '-': '-',
-    '*': '*',
-    '^': '^',
-    '(': '(',
-    ')': ')',
-    '!': '!',
-    s: 'sqrt(',
-    l: 'ln(',
-    g: 'log(',
-    p: 'pi',
-    e: 'e',
-  };
-
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey || e.altKey || e.metaKey) return;
+    if (e.key === 'Enter') { e.preventDefault(); exprInput.value = expr; form.submit(); return; }
+    if (e.key === 'Escape' || e.key === 'Delete') { clear(); return; }
+    if (e.key === 'Backspace') { backspace(); return; }
     if (e.key === '/') e.preventDefault();
-    if (e.key in keyMap) {
-      append(keyMap[e.key]);
-    } else if (e.key === 'Enter') {
-      submit();
-    } else if (e.key === 'Escape' || e.key === 'Delete') {
-      clear();
-    } else if (e.key === 'Backspace') {
-      backspace();
-    }
+    if (e.key.length === 1) append(e.key);
   });
 })();

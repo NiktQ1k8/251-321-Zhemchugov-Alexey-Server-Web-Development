@@ -39,6 +39,30 @@ function calcSqrt(float $n): float
   return sqrt($n);
 }
 
+function calcSin(float $n): float
+{
+  return sin($n);
+}
+
+function calcCos(float $n): float
+{
+  return cos($n);
+}
+
+function calcTan(float $n): float
+{
+  return tan($n);
+}
+
+function calcCot(float $n): float
+{
+  $s = sin($n);
+  if ($s == 0.0) {
+    throw new Exception('Котангенс не определён');
+  }
+  return cos($n) / $s;
+}
+
 function calcLn(float $n): float
 {
   if ($n <= 0) {
@@ -194,7 +218,7 @@ function parsePrimary(array &$tokens, int &$pos): float
     if ($name === 'e') {
       return M_E;
     }
-    if (in_array($name, ['sqrt', 'ln', 'log'])) {
+    if (in_array($name, ['sqrt', 'ln', 'log', 'sin', 'cos', 'tg', 'ctg'])) {
       expectToken($tokens, $pos, '(', "Ожидается '(' после $name");
       $arg = parseExpr($tokens, $pos);
       expectToken($tokens, $pos, ')', "Ожидается ')' после аргумента $name");
@@ -202,6 +226,10 @@ function parsePrimary(array &$tokens, int &$pos): float
         'sqrt' => calcSqrt($arg),
         'ln' => calcLn($arg),
         'log' => calcLog($arg),
+        'sin' => calcSin($arg),
+        'cos' => calcCos($arg),
+        'tg' => calcTan($arg),
+        'ctg' => calcCot($arg),
       };
     }
     throw new Exception("Неизвестная функция или константа: '$name'");
@@ -270,48 +298,52 @@ $exprParam = $_GET['expr'] ?? '';
       <input type="hidden" id="expression" name="expression">
 
       <div class="calc-buttons">
-        <button type="button" class="btn btn-fn" data-op="clear">C</button>
-        <button type="button" class="btn btn-fn" data-op="back">⌫</button>
+        <button type="button" class="btn" data-op="clear">C</button>
+        <button type="button" class="btn" data-op="back">⌫</button>
         <button type="button" class="btn" data-insert="(">(</button>
         <button type="button" class="btn" data-insert=")">)</button>
 
-        <button type="button" class="btn btn-fn" data-insert="sqrt(">sqrt (s)</button>
-        <button type="button" class="btn btn-fn" data-insert="ln(">ln (l)</button>
-        <button type="button" class="btn btn-fn" data-insert="log(">log (g)</button>
-        <button type="button" class="btn btn-fn" data-insert="!">!</button>
+        <button type="button" class="btn" data-insert="sin(">sin</button>
+        <button type="button" class="btn" data-insert="cos(">cos</button>
+        <button type="button" class="btn" data-insert="tg(">tg</button>
+        <button type="button" class="btn" data-insert="ctg(">ctg</button>
 
-        <button type="button" class="btn btn-fn" data-insert="pi">pi (p)</button>
-        <button type="button" class="btn btn-fn" data-insert="e">e</button>
-        <button type="button" class="btn btn-fn" data-insert="^">^</button>
-        <button type="button" class="btn btn-op" data-insert="/">/</button>
+        <button type="button" class="btn" data-insert="sqrt(">√</button>
+        <button type="button" class="btn" data-insert="ln(">ln</button>
+        <button type="button" class="btn" data-insert="log(">log</button>
+        <button type="button" class="btn" data-insert="!">!</button>
 
-        <button type="button" class="btn btn-num" data-insert="7">7</button>
-        <button type="button" class="btn btn-num" data-insert="8">8</button>
-        <button type="button" class="btn btn-num" data-insert="9">9</button>
-        <button type="button" class="btn btn-op" data-insert="*">*</button>
+        <button type="button" class="btn" data-insert="pi">π</button>
+        <button type="button" class="btn" data-insert="e">e</button>
+        <button type="button" class="btn" data-insert="^">^</button>
+        <button type="button" class="btn" data-insert="/">/</button>
 
-        <button type="button" class="btn btn-num" data-insert="4">4</button>
-        <button type="button" class="btn btn-num" data-insert="5">5</button>
-        <button type="button" class="btn btn-num" data-insert="6">6</button>
-        <button type="button" class="btn btn-op" data-insert="-">-</button>
+        <button type="button" class="btn" data-insert="7">7</button>
+        <button type="button" class="btn" data-insert="8">8</button>
+        <button type="button" class="btn" data-insert="9">9</button>
+        <button type="button" class="btn" data-insert="*">*</button>
 
-        <button type="button" class="btn btn-num" data-insert="1">1</button>
-        <button type="button" class="btn btn-num" data-insert="2">2</button>
-        <button type="button" class="btn btn-num" data-insert="3">3</button>
-        <button type="button" class="btn btn-op" data-insert="+">+</button>
+        <button type="button" class="btn" data-insert="4">4</button>
+        <button type="button" class="btn" data-insert="5">5</button>
+        <button type="button" class="btn" data-insert="6">6</button>
+        <button type="button" class="btn" data-insert="-">-</button>
 
-        <button type="button" class="btn btn-num btn-zero" data-insert="0">0</button>
-        <button type="button" class="btn btn-num" data-insert=".">.</button>
+        <button type="button" class="btn" data-insert="1">1</button>
+        <button type="button" class="btn" data-insert="2">2</button>
+        <button type="button" class="btn" data-insert="3">3</button>
+        <button type="button" class="btn" data-insert="+">+</button>
+
+        <button type="button" class="btn btn-zero" data-insert="0">0</button>
+        <button type="button" class="btn" data-insert=".">.</button>
         <button type="submit" class="btn btn-eq">=</button>
       </div>
     </form>
   </div>
 
   <div class="calc-hint">
-    Клавиатура: цифры, <code>+-*/^()!.</code>,
-    <code>s</code>=√, <code>l</code>=ln, <code>g</code>=log,
-    <code>p</code>=π, <code>e</code>=e,
-    Enter=вычислить, Esc=очистить
+    Введите выражение с клавиатуры: числа, <code>+ − * / ^ ( ) ! .</code>,
+    функции: <code>sin cos tg ctg sqrt ln log</code>,
+    константы: <code>pi e</code> — Enter=вычислить, Esc=очистить
   </div>
 </main>
 
