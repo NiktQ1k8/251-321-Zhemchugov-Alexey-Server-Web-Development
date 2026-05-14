@@ -1,6 +1,6 @@
 <?php
 
-$equation = '5 + X = 11';
+$equation = 'X * 9 = 56';
 
 preg_match('/^(\S+)\s*([\+\-\*\/])\s*(\S+)\s*=\s*(\S+)$/', $equation, $m);
 [, $left, $operator, $right, $result] = $m;
