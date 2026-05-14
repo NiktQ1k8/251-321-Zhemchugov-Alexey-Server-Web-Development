@@ -35,3 +35,9 @@
 .footer__nav a:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 900px) {
+  .footer__nav {
+    grid-template-columns: 1fr;
+  }
+}

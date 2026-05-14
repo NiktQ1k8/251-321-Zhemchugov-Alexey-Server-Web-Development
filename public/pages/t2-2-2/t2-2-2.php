@@ -339,12 +339,6 @@ $exprParam = $_GET['expr'] ?? '';
       </div>
     </form>
   </div>
-
-  <div class="calc-hint">
-    Введите выражение с клавиатуры: числа, <code>+ − * / ^ ( ) ! .</code>,
-    функции: <code>sin cos tg ctg sqrt ln log</code>,
-    константы: <code>pi e</code> — Enter=вычислить, Esc=очистить
-  </div>
 </main>
 
 <script>
