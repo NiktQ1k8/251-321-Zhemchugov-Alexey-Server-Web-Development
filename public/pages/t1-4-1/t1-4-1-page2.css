@@ -1,8 +1,24 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   flex-grow: 1;
   padding: 1rem;
+}
+
+.textarea {
+  min-width: 17rem;
+}
+
+.link-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #f0f0f0;
+  border: 1px solid #bbb;
+  text-decoration: none;
+  color: #000;
+}
+
+.link-btn:hover {
+  background: #e0e0e0;
 }

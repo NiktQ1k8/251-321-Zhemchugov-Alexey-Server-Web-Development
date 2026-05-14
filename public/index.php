@@ -30,7 +30,7 @@ if (!array_key_exists($page, $pages)) {
 }
 
 $pageTitle = $pages[$page];
-$pageCSS = "/pages/$page/$page.css";
+$pageCSS = $subpage !== null ? "/pages/$page/$page-$subpage.css" : "/pages/$page/$page.css";
 $pageJS = "/pages/$page/$page.js";
 $pageContentPath = $subpage !== null ? __DIR__ . "/pages/$page/$page-$subpage.php" : __DIR__ . "/pages/$page/$page.php";
 

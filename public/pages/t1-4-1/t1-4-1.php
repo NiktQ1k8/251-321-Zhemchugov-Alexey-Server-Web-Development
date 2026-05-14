@@ -34,7 +34,5 @@
     <button class="form__button" type="submit">Отправить</button>
   </form>
 
-  <p>
-    <a class="link-btn" href="/t1-4-1/page2">Перейти на 2 страницу ==></a>
-  </p>
+  <a class="link-btn" href="/t1-4-1/page2">Перейти на 2 страницу &#8594;</a>
 </main>
