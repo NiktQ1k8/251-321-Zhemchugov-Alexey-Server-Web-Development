@@ -1,6 +1,6 @@
 <?php
 
-$equation = 'X * 9 = 56';
+$equation = '5 + X = 11';
 
 preg_match('/^(\S+)\s*([\+\-\*\/])\s*(\S+)\s*=\s*(\S+)$/', $equation, $m);
 [, $left, $operator, $right, $result] = $m;
@@ -22,11 +22,11 @@ $xDec = rtrim(rtrim(number_format($x, 8, '.', ''), '0'), '.');
 <main class="main">
   <div class="equation">
     <strong>Уравнение:</strong>
-    <code class="equation__expr"><?= htmlspecialchars($equation) ?></code>
+    <code><?= htmlspecialchars($equation) ?></code>
   </div>
 
   <p class="answer"><strong>X = <?= htmlspecialchars($xDec) ?></strong></p>
 
-  <h2 style="text-align: center;">Блок-схема алгоритма</h2>
+  <h2>Блок-схема алгоритма</h2>
   <img src="/images/t2-1-2.png" alt="">
 </main>
