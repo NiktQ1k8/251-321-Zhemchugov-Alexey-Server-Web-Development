@@ -1,6 +1,7 @@
 .main {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   flex-grow: 1;
   padding: 1rem;
@@ -13,6 +14,7 @@ form {
 
 p {
   margin: 1rem 0 0.3rem;
+  color: #555;
 }
 
 .form__label {
@@ -21,23 +23,30 @@ p {
 
 .form__input,
 .form__textarea {
+  box-sizing: border-box;
   width: 100%;
   padding: 0.5rem;
-  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid #bbb;
+  resize: vertical;
 }
 
 .form__button,
 .link-btn {
   margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: #f0f0f0;
+  padding: 0.5rem 1.25rem;
+  background: #fff;
   border: 1px solid #bbb;
   text-decoration: none;
-  color: #000;
+  color: #333;
   cursor: pointer;
+  transition:
+    background 0.3s,
+    border-color 0.3s;
 }
 
 .form__button:hover,
 .link-btn:hover {
-  background: #e0e0e0;
+  background: #f5f5f5;
+  border-color: #999;
 }
