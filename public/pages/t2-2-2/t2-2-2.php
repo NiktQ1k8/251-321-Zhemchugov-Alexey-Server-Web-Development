@@ -1,5 +1,15 @@
 <?php
 
+require_once __DIR__ . '/_trig.php';
+
+$fileExprResult = null;
+$fileExprSource = null;
+$exprFile = __DIR__ . '/expression.txt';
+if (file_exists($exprFile)) {
+  $fileExprSource = trim(file_get_contents($exprFile));
+  $fileExprResult = evaluateExpression($fileExprSource);
+}
+
 function calcAdd(float $a, float $b): float
 {
   return $a + $b;
@@ -218,7 +228,7 @@ function parsePrimary(array &$tokens, int &$pos): float
     if ($name === 'e') {
       return M_E;
     }
-    if (in_array($name, ['sqrt', 'ln', 'log', 'sin', 'cos', 'tg', 'ctg'])) {
+    if (in_array($name, ['sqrt', 'ln', 'log', 'sin', 'cos', 'tg', 'ctg', 'tan', 'cot'])) {
       expectToken($tokens, $pos, '(', "Ожидается '(' после $name");
       $arg = parseExpr($tokens, $pos);
       expectToken($tokens, $pos, ')', "Ожидается ')' после аргумента $name");
@@ -226,10 +236,7 @@ function parsePrimary(array &$tokens, int &$pos): float
         'sqrt' => calcSqrt($arg),
         'ln' => calcLn($arg),
         'log' => calcLog($arg),
-        'sin' => calcSin($arg),
-        'cos' => calcCos($arg),
-        'tg' => calcTan($arg),
-        'ctg' => calcCot($arg),
+        default => calcTrig($name, $arg),
       };
     }
     throw new Exception("Неизвестная функция или константа: '$name'");
@@ -291,51 +298,59 @@ $exprParam = $_GET['expr'] ?? '';
 ?>
 
 <main class="main">
+  <?php if ($fileExprResult !== null): ?>
+  <div class="file-expr">
+    <span class="file-expr__label">Выражение из файла expression.txt:</span>
+    <span class="file-expr__value"><?= htmlspecialchars($fileExprSource) ?> = <?= htmlspecialchars(
+   $fileExprResult,
+ ) ?></span>
+  </div>
+  <?php endif; ?>
   <div class="calculator">
-    <div class="calc-display" id="display">0</div>
+    <div class="calculator__display" id="display">0</div>
 
     <form id="calcForm" method="post" action="/t2-2-2">
       <input type="hidden" id="expression" name="expression">
 
-      <div class="calc-buttons">
-        <button type="button" class="btn" data-op="clear">C</button>
-        <button type="button" class="btn" data-op="back">⌫</button>
-        <button type="button" class="btn" data-insert="(">(</button>
-        <button type="button" class="btn" data-insert=")">)</button>
+      <div class="calculator__buttons">
+        <button type="button" class="calculator__btn" data-op="clear">C</button>
+        <button type="button" class="calculator__btn" data-op="back">⌫</button>
+        <button type="button" class="calculator__btn" data-insert="(">(</button>
+        <button type="button" class="calculator__btn" data-insert=")">)</button>
 
-        <button type="button" class="btn" data-insert="sin(">sin</button>
-        <button type="button" class="btn" data-insert="cos(">cos</button>
-        <button type="button" class="btn" data-insert="tg(">tg</button>
-        <button type="button" class="btn" data-insert="ctg(">ctg</button>
+        <button type="button" class="calculator__btn" data-insert="sin(">sin</button>
+        <button type="button" class="calculator__btn" data-insert="cos(">cos</button>
+        <button type="button" class="calculator__btn" data-insert="tg(">tg</button>
+        <button type="button" class="calculator__btn" data-insert="ctg(">ctg</button>
 
-        <button type="button" class="btn" data-insert="sqrt(">√</button>
-        <button type="button" class="btn" data-insert="ln(">ln</button>
-        <button type="button" class="btn" data-insert="log(">log</button>
-        <button type="button" class="btn" data-insert="!">!</button>
+        <button type="button" class="calculator__btn" data-insert="sqrt(">√</button>
+        <button type="button" class="calculator__btn" data-insert="ln(">ln</button>
+        <button type="button" class="calculator__btn" data-insert="log(">log</button>
+        <button type="button" class="calculator__btn" data-insert="!">!</button>
 
-        <button type="button" class="btn" data-insert="pi">π</button>
-        <button type="button" class="btn" data-insert="e">e</button>
-        <button type="button" class="btn" data-insert="^">^</button>
-        <button type="button" class="btn" data-insert="/">/</button>
+        <button type="button" class="calculator__btn" data-insert="pi">π</button>
+        <button type="button" class="calculator__btn" data-insert="e">e</button>
+        <button type="button" class="calculator__btn" data-insert="^">^</button>
+        <button type="button" class="calculator__btn" data-insert="/">/</button>
 
-        <button type="button" class="btn" data-insert="7">7</button>
-        <button type="button" class="btn" data-insert="8">8</button>
-        <button type="button" class="btn" data-insert="9">9</button>
-        <button type="button" class="btn" data-insert="*">*</button>
+        <button type="button" class="calculator__btn" data-insert="7">7</button>
+        <button type="button" class="calculator__btn" data-insert="8">8</button>
+        <button type="button" class="calculator__btn" data-insert="9">9</button>
+        <button type="button" class="calculator__btn" data-insert="*">*</button>
 
-        <button type="button" class="btn" data-insert="4">4</button>
-        <button type="button" class="btn" data-insert="5">5</button>
-        <button type="button" class="btn" data-insert="6">6</button>
-        <button type="button" class="btn" data-insert="-">-</button>
+        <button type="button" class="calculator__btn" data-insert="4">4</button>
+        <button type="button" class="calculator__btn" data-insert="5">5</button>
+        <button type="button" class="calculator__btn" data-insert="6">6</button>
+        <button type="button" class="calculator__btn" data-insert="-">-</button>
 
-        <button type="button" class="btn" data-insert="1">1</button>
-        <button type="button" class="btn" data-insert="2">2</button>
-        <button type="button" class="btn" data-insert="3">3</button>
-        <button type="button" class="btn" data-insert="+">+</button>
+        <button type="button" class="calculator__btn" data-insert="1">1</button>
+        <button type="button" class="calculator__btn" data-insert="2">2</button>
+        <button type="button" class="calculator__btn" data-insert="3">3</button>
+        <button type="button" class="calculator__btn" data-insert="+">+</button>
 
-        <button type="button" class="btn btn-zero" data-insert="0">0</button>
-        <button type="button" class="btn" data-insert=".">.</button>
-        <button type="submit" class="btn btn-eq">=</button>
+        <button type="button" class="calculator__btn calculator__btn--zero" data-insert="0">0</button>
+        <button type="button" class="calculator__btn" data-insert=".">.</button>
+        <button type="submit" class="calculator__btn calculator__btn--eq">=</button>
       </div>
     </form>
   </div>

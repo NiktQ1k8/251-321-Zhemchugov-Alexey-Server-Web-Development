@@ -22,7 +22,7 @@ $xDec = rtrim(rtrim(number_format($x, 8, '.', ''), '0'), '.');
 <main class="main">
   <div class="equation">
     <strong>Уравнение:</strong>
-    <code><?= htmlspecialchars($equation) ?></code>
+    <span><?= htmlspecialchars($equation) ?></span>
   </div>
 
   <p class="answer"><strong>X = <?= htmlspecialchars($xDec) ?></strong></p>

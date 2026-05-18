@@ -3,16 +3,18 @@
   const form = document.getElementById('calcForm');
   const exprInput = document.getElementById('expression');
 
+  if (!display || !form || !exprInput) return;
+
   let expr = '';
   let afterResult = false;
 
-  const { resultParam, exprParam } = window.__calc;
+  const { resultParam = null, exprParam = '' } = window.__calc ?? {};
 
   if (resultParam !== null) {
     expr = exprParam;
     afterResult = true;
     display.textContent = resultParam;
-    display.classList.toggle('calc-display--error', resultParam.startsWith('Ошибка'));
+    display.classList.toggle('calculator__display--error', resultParam.startsWith('Ошибка'));
   }
 
   function updateDisplay() {
@@ -23,7 +25,7 @@
     if (afterResult) {
       expr = '';
       afterResult = false;
-      display.classList.remove('calc-display--error');
+      display.classList.remove('calculator__display--error');
     }
     expr += str;
     updateDisplay();
@@ -32,13 +34,16 @@
   function clear() {
     expr = '';
     afterResult = false;
-    display.classList.remove('calc-display--error');
+    display.classList.remove('calculator__display--error');
     updateDisplay();
   }
 
   function backspace() {
-    if (afterResult) { clear(); return; }
-    const tokens = ['ctg(', 'sqrt(', 'sin(', 'cos(', 'log(', 'tg(', 'ln(', 'pi'];
+    if (afterResult) {
+      clear();
+      return;
+    }
+    const tokens = ['ctg(', 'sqrt(', 'sin(', 'cos(', 'log(', 'tg(', 'ln(', 'cot(', 'tan(', 'pi'];
     for (const tok of tokens) {
       if (expr.endsWith(tok)) {
         expr = expr.slice(0, -tok.length);
@@ -50,7 +55,17 @@
     updateDisplay();
   }
 
-  document.querySelectorAll('.btn').forEach((btn) => {
+  function submit() {
+    if (!expr) {
+      display.textContent = 'Ошибка: пустое выражение';
+      display.classList.add('calculator__display--error');
+      return;
+    }
+    exprInput.value = expr;
+    form.submit();
+  }
+
+  document.querySelectorAll('.calculator__btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const ins = btn.dataset.insert;
       const op = btn.dataset.op;
@@ -60,15 +75,26 @@
     });
   });
 
-  form.addEventListener('submit', () => {
-    exprInput.value = expr;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submit();
   });
 
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey || e.altKey || e.metaKey) return;
-    if (e.key === 'Enter') { e.preventDefault(); exprInput.value = expr; form.submit(); return; }
-    if (e.key === 'Escape' || e.key === 'Delete') { clear(); return; }
-    if (e.key === 'Backspace') { backspace(); return; }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      submit();
+      return;
+    }
+    if (e.key === 'Escape' || e.key === 'Delete') {
+      clear();
+      return;
+    }
+    if (e.key === 'Backspace') {
+      backspace();
+      return;
+    }
     if (e.key === '/') e.preventDefault();
     if (e.key.length === 1) append(e.key);
   });
