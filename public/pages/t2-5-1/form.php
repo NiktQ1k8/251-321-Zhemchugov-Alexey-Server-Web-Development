@@ -1,6 +1,5 @@
 <?php
-$genders = ['мужской', 'женский'];
-?>
+$genders = ['мужской', 'женский']; ?>
 <form name="form_add" method="post" action="<?= htmlspecialchars($formAction) ?>">
   <div class="column">
     <div class="add">

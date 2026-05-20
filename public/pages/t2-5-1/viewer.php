@@ -6,9 +6,13 @@ function nb_connect()
   mysqli_report(MYSQLI_REPORT_OFF);
   $host = getenv('DB_HOST') ?: 'localhost';
   $mysqli = mysqli_connect($host, 'cy70660_serverwebdevelopment', 't1ip4bUQ', 'cy70660_serverwebdevelopment');
-  if (!$mysqli) return null;
+  if (!$mysqli) {
+    return null;
+  }
   mysqli_set_charset($mysqli, 'utf8mb4');
-  mysqli_query($mysqli, "CREATE TABLE IF NOT EXISTS notebook (
+  mysqli_query(
+    $mysqli,
+    "CREATE TABLE IF NOT EXISTS notebook (
       id       INT AUTO_INCREMENT PRIMARY KEY,
       surname  VARCHAR(100) NOT NULL DEFAULT '',
       name     VARCHAR(100) NOT NULL DEFAULT '',
@@ -19,7 +23,8 @@ function nb_connect()
       location VARCHAR(200) DEFAULT '',
       email    VARCHAR(100) DEFAULT '',
       comment  TEXT
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4",
+  );
   return $mysqli;
 }
 
@@ -31,7 +36,9 @@ function getFriendsList($type, $page)
   }
 
   $res = mysqli_query($mysqli, 'SELECT COUNT(*) FROM notebook');
-  if (!$res) return '<p class="error">Ошибка базы данных</p>';
+  if (!$res) {
+    return '<p class="error">Ошибка базы данных</p>';
+  }
 
   $row = mysqli_fetch_row($res);
   $total = intval($row[0]);
@@ -43,10 +50,12 @@ function getFriendsList($type, $page)
 
   $perPage = 10;
   $pages = (int) ceil($total / $perPage);
-  if ($page >= $pages) $page = $pages - 1;
+  if ($page >= $pages) {
+    $page = $pages - 1;
+  }
 
   $orderBy = match ($type) {
-    'fam'   => 'surname ASC, name ASC',
+    'fam' => 'surname ASC, name ASC',
     'birth' => 'date ASC',
     default => 'id ASC',
   };
@@ -55,8 +64,7 @@ function getFriendsList($type, $page)
   $res = mysqli_query($mysqli, "SELECT * FROM notebook ORDER BY {$orderBy} LIMIT {$offset}, {$perPage}");
 
   $ret = '<table class="nb-table">';
-  $ret .= '<tr><th>#</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Пол</th>'
-        . '<th>Дата рождения</th><th>Телефон</th><th>Адрес</th><th>Email</th><th>Комментарий</th></tr>';
+  $ret .= '<tr><th>#</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Пол</th>' . '<th>Дата рождения</th><th>Телефон</th><th>Адрес</th><th>Email</th><th>Комментарий</th></tr>';
 
   $i = $offset + 1;
   while ($row = mysqli_fetch_assoc($res)) {

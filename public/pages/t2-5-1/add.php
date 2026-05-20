@@ -35,11 +35,11 @@ $formAction = '/t2-5-1?p=add';
 ?>
 
 <?php if ($status === 'ok'): ?>
-    <p class="success">Запись добавлена</p>
+  <p class="success">Запись добавлена</p>
 <?php elseif ($status === 'err'): ?>
-    <p class="error">Ошибка: запись не добавлена</p>
+  <p class="error">Ошибка: запись не добавлена</p>
 <?php elseif ($status === 'dberr'): ?>
-    <p class="error">Ошибка подключения к базе данных</p>
+  <p class="error">Ошибка подключения к базе данных</p>
 <?php endif; ?>
 
 <?php include __DIR__ . '/form.php'; ?>

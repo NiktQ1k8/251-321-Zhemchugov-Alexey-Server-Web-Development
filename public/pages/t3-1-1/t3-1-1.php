@@ -31,19 +31,18 @@ function captureOutput(string $file): string
 ?>
 
 <main class="main">
-  <h1 class="page-title">3.1.1. ООП</h1>
+  <h1>3.1.1. ООП</h1>
 
-  <div class="sections">
+  <div class="page__sections">
     <?php foreach ($sections as $i => $section): ?>
       <section class="section">
-        <div class="section-header">
-          <span class="section-number"><?= $i + 1 ?></span>
+        <div class="section__header">
           <div>
-            <h2 class="section-title"><?= htmlspecialchars($section['title']) ?></h2>
-            <p class="section-desc"><?= htmlspecialchars($section['description']) ?></p>
+            <h2 class="section__title"><?= $i + 1 ?>. <?= htmlspecialchars($section['title']) ?></h2>
+            <p class="section__desc"><?= htmlspecialchars($section['description']) ?></p>
           </div>
         </div>
-        <pre class="section-output"><?= htmlspecialchars(captureOutput($section['file'])) ?></pre>
+        <pre class="section__output"><?= htmlspecialchars(captureOutput($section['file'])) ?></pre>
       </section>
     <?php endforeach; ?>
   </div>
