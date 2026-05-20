@@ -5,6 +5,24 @@ services:
       - '8000:8000'
     volumes:
       - ./public:/var/www/html
+    environment:
+      DB_HOST: mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cy70660_serverwebdevelopment
+      MYSQL_USER: cy70660_serverwebdevelopment
+      MYSQL_PASSWORD: 't1ip4bUQ'
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   browsersync:
     image: ustwo/browser-sync:latest

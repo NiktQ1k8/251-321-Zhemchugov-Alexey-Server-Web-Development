@@ -51,8 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="/includes/style.css" />
   <link rel="stylesheet" href="/includes/_header.css" />
   <link rel="stylesheet" href="/includes/_footer.css" />
+  <?php if (file_exists(__DIR__ . $pageCSS)): ?>
   <link rel="stylesheet" href="<?= htmlspecialchars($pageCSS) ?>" />
+  <?php endif; ?>
+  <?php if (file_exists(__DIR__ . $pageJS)): ?>
   <script src="<?= htmlspecialchars($pageJS) ?>" defer></script>
+  <?php endif; ?>
 </head>
 
 <body>

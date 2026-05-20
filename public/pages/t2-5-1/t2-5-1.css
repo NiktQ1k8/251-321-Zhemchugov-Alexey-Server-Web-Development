@@ -1,8 +1,242 @@
-.main {
+:root {
+  --color_a: rgb(1, 5, 17);
+  --back_a: rgba(92, 103, 168, 0.541);
+}
+
+main {
+  padding: 1rem;
+  text-align: center;
+}
+
+.nb-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 1rem auto 0;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 5px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: black;
+  background-color: #fff;
+  border: 1px solid var(--color_a);
+  border-radius: 5px;
+}
+
+label {
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 130px;
+  flex-shrink: 0;
+  text-align: right;
+  padding-right: 12px;
+}
+
+.add {
+  width: 90%;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+}
+
+.column {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 520px;
+}
+
+.form-btn {
+  background-color: rgb(92, 103, 168);
+  border: none;
+  width: 200px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  transition: 0.3s;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.form-btn:hover {
+  cursor: pointer;
+  background-color: #0d26b4;
+}
+
+.div-edit {
+  width: 200px;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.div-edit .currentRow {
+  color: var(--color_a);
+  background-color: var(--back_a);
+}
+
+.submenu {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.submenu a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.submenu .select {
+  text-decoration: underline;
+  text-decoration-style: double;
+}
+
+.success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  margin: 0.5rem auto;
+  border: 1px solid;
+  display: block;
+  max-width: 600px;
+  text-align: center;
+}
+
+.error {
+  color: red;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  margin: 0.5rem auto;
+  border: 1px solid;
+  display: block;
+  max-width: 600px;
+  text-align: center;
+}
+
+.nb-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+}
+
+.nb-nav__item {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  background: rgb(92, 103, 168);
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: sans-serif;
+  transition: background 0.2s;
+}
+
+.nb-nav__item:hover {
+  background: #0d26b4;
+  color: #fff !important;
+}
+
+.nb-nav__item.nb-active {
+  background: #c0392b;
+}
+
+.nb-nav__item.nb-active:hover {
+  background: #a93226;
+}
+
+.nb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin: 0 auto;
+}
+
+.nb-table th {
+  background: rgba(92, 103, 168, 0.2);
+  font-weight: 600;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+}
+
+.nb-table td {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.nb-pages {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-top: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.nb-pages a,
+.nb-pages span {
+  display: inline-block;
+  min-width: 2rem;
+  padding: 0.3rem 0.6rem;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.nb-pages a {
+  border: 1px solid transparent;
+  transition: border 0.15s;
+}
+
+.nb-pages a:hover {
+  border: 2px solid rgb(92, 103, 168);
+  background: transparent;
+}
+
+.nb-pages span {
+  background: #c0392b;
+  color: #fff;
+  font-weight: 600;
+}
+
+.nb-edit-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nb-delete-list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 6px;
   align-items: center;
-  flex-grow: 1;
-  padding: 1rem;
+}
+
+.nb-delete-link {
+  display: block;
+  padding: 5px 14px;
+  background: #f8d7da;
+  border: 1px solid #f5c2c7;
+  border-radius: 5px;
+  color: #842029 !important;
+  font-family: sans-serif;
+  transition: background 0.2s;
+}
+
+.nb-delete-link:hover {
+  background: #f1aeb5;
 }

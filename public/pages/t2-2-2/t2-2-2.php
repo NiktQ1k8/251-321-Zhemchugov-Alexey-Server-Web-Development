@@ -300,10 +300,8 @@ $exprParam = $_GET['expr'] ?? '';
 <main class="main">
   <?php if ($fileExprResult !== null): ?>
   <div class="file-expr">
-    <span class="file-expr__label">Выражение из файла expression.txt:</span>
-    <span class="file-expr__value"><?= htmlspecialchars($fileExprSource) ?> = <?= htmlspecialchars(
-   $fileExprResult,
- ) ?></span>
+    <span>Выражение из файла expression.txt:</span>
+    <span><?= htmlspecialchars($fileExprSource) ?> = <?= htmlspecialchars($fileExprResult) ?></span>
   </div>
   <?php endif; ?>
   <div class="calculator">
